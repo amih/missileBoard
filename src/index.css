@@ -1,0 +1,35 @@
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.btnUp{
+  border: 5px solid black;
+  height: 30px;
+  width: 30px;
+  background-color: rgb(91, 50, 205)7, 64)
+}
+.btnDown{
+  border: 5px solid black;
+  height: 30px;
+  width: 30px;
+  background-color: rgb(91, 50, 205)7, 64)
+}
+.btnFirst{
+  border: 5px solid black;
+  height: 30px;
+  width: 30px;
+  background-color: rgb(91, 50, 205)7, 64)
+}
+.btnLast{
+  border: 5px solid black;
+  height: 30px;
+  width: 30px;
+  background-color: rgb(91, 50, 205)7, 64)
+}
+.cell{
+  border: 1px solid black;
+  background-color: rgb(205, 50, 140)
+}
