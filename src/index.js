@@ -374,6 +374,213 @@ function printMissleVision(array){
 	ans="  ^ "
 	console.log(ans)
 }
+function test1MineDirectionNorthMineAtNorthWest(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"North"
+	}
+	insertMineAt(myBoard,4,4)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="East"){
+		console.log("succses to change the direction fron North when the mine is in North West")
+	}
+	else{
+		console.log("failed to change the direction fron North when the mine is in North West")
+	}
+}
+function test1MineDirectionNorthMineAtNorthEast(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"North"
+	}
+	insertMineAt(myBoard,6,4)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="West"){
+		console.log("succses to change the direction fron North when the mine is in North East")
+	}
+	else{
+		console.log("failed to change the direction fron North when the mine is in North East")
+	}
+}
+function test1MineDirectionNorthHittingTheTarget(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"North"
+	}
+	insertMineAt(myBoard,5,4)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="hit"){
+		console.log("succses to hit the target")
+	}
+	else{
+		console.log("failed to hit the target")
+	}
+}
+function test2MinesDirectionNorthU_Turn(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"North"
+	}
+	insertMineAt(myBoard,6,4)
+	insertMineAt(myBoard,4,4)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="South"){
+		console.log("succses to do U_Turn with 2 mines")
+	}
+	else{
+		console.log("failed to do U_Turn with 2 mines")
+	}
+}
+function test1MineDirectionSouthMineAtSouthhWest(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"South"
+	}
+	insertMineAt(myBoard,4,6)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="East"){
+		console.log("succses to change the direction fron South when the mine is in South West")
+	}
+	else{
+		console.log("failed to change the direction fron South when the mine is in South West")
+	}
+}
+function test1MineDirectionSouthMineAtSouthEast(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"South"
+	}
+	insertMineAt(myBoard,6,6)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="East"){
+		console.log("succses to change the direction fron South when the mine is in South West")
+	}
+	else{
+		console.log("failed to change the direction fron South when the mine is in South west")
+	}
+}
+function test1MineDirectionSouthHittingTheTarget(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"South"
+	}
+	insertMineAt(myBoard,5,6)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="hit"){
+		console.log("succses to hit the target")
+	}
+	else{
+		console.log("failed to hit the target")
+	}
+}
+function test2MinesDirectionSouthU_Turn(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"South"
+	}
+	insertMineAt(myBoard,6,6)
+	insertMineAt(myBoard,4,6)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="North"){
+		console.log("succses to do U_Turn with 2 mines")
+	}
+	else{
+		console.log("failed to do U_Turn with 2 mines")
+	}
+}
+function test1MineDirectionWestMineAtNorthWest(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"West"
+	}
+	insertMineAt(myBoard,4,4)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="South"){
+		console.log("succses to change direction from West when the mine is in Nort West")
+	}
+	else{
+		console.log("failed to change direction from West when the mine is in Nort West")
+	}
+}
+function test1MineDirectionWestMineAtSouthWest(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"West"
+	}
+	insertMineAt(myBoard,4,6)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="North"){
+		console.log("succses to change direction from West when the mine is in South West")
+	}
+	else{
+		console.log("failed to change direction from West when the mine is in South West")
+	}
+}
+function test1MineDirectionWestHittingTheTarget(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"West"
+	}
+	insertMineAt(myBoard,4,5)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="hit"){
+		console.log("succses to hit the target direction West")
+	}
+	else{
+		console.log("failed to hit the target direction West")
+	}
+}
+function test2MinesDirectionWestU_Turn(){
+	var myBoard=make2DArray()
+	cleanBoard(myBoard)
+	var missle={
+		x:5,
+		y:5,
+		direction:"West"
+	}
+	insertMineAt(myBoard,4,6)
+	insertMineAt(myBoard,4,4)
+	var ans=checkMissle(myBoard,missle)
+	if(ans==="East"){
+		console.log("succses to do u_turn direction West")
+	}
+	else{
+		console.log("failed to do u_turn direction West")
+	}
+}
 var gameBoard = make2DArray()
 cleanBoard(gameBoard)
 printBoard(gameBoard)
