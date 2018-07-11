@@ -30,7 +30,10 @@ function inserMine(board) {
 }
 
 function checkMine(board,x, y) {
-    if (board[y][x] === 0) {
+	if(y===-1|| y===10||x===-1||x===10){
+		return false
+	}
+	if (board[y][x] === 0) {
         return false
     } else {
         return true
@@ -66,92 +69,78 @@ function inserMines(board, num) {
 }
 
 function checkMissleNorth(board,missle) {
-    var x = missle.x
-    var y = missle.y
-
-    if (checkMine(board,x, y - 1)) {
-        console.log("hit")
-        return "hit"
-    } else {
-        if (checkMine(board,x + 1, y - 1)) {
-            console.log("there is a mine at north east")
-            return "Weast"
-        } else {
-            if (checkMine(board,x - 1, y - 1)) {
-                console.log("there is a mine at north west")
-                return "East"
-            } else {
-                console.log("there is nothing")
-                return "North"
-            }
-        }
-    }
+	var vision=missleVision(board,missle)
+	if(vision[1]===1){
+		return "hit"
+	}
+	if(vision[0]===1&&vision[2]===1){
+		return "South"
+	}
+	if(vision[0]===1){
+		return "East"
+	}
+	if(vision[2]===1){
+		return "West"
+	}
+	else{
+		return "North"
+	}
 }
-
 function checkMissleSouth(board,missle) {
-    var x = missle.x
-    var y = missle.y
-    if (checkMine(board,x, y + 1)) {
-        console.log("hit")
-        return "hit"
-    } else {
-        if (checkMine(board,x + 1, y + 1)) {
-            console.log("there is a mine at north east")
-            return "Weast"
-        } else {
-            if (checkMine(board,x - 1, y + 1)) {
-                console.log("there is a mine at north west")
-                return "East"
-            } else {
-                console.log("there is nothing")
-                return "South"
-            }
-        }
-    }
+	var vision=missleVision(board,missle)
+	if(vision[1]===1){
+		return "hit"
+	}
+	if(vision[0]===1&&vision[2]===1){
+		return "North"
+	}
+	if(vision[0]===1){
+		return "East"
+	}
+	if(vision[2]===1){
+		return "West"
+	}
+	else{
+		return "South"
+	}
 }
 
 function checkMissleEast(board,missle) {
-    var x = missle.x
-    var y = missle.y
-    if (checkMine(board,x + 1, y)) {
-        console.log("hit")
-        return "hit"
-    } else {
-        if (checkMine(board,x + 1, y - 1)) {
-            console.log("there is a mine at north east")
-            return "South"
-        } else {
-            if (checkMine(board,x + 1, y + 1)) {
-                console.log("there is a mine at South east")
-                return "North"
-            } else {
-                console.log("there is nothing")
-                return "East"
-            }
-        }
-    }
+	var vision=missleVision(board,missle)
+	if(vision[1]===1){
+		return "hit"
+	}
+	if(vision[0]===1&&vision[2]===1){
+		return "West"
+	}
+	if(vision[0]===1){
+		return "South"
+	}
+	if(vision[2]===1){
+		return "North"
+	}
+	else{
+		return "East"
+	}
 }
 
-function checkMissleWeast(board,missle) {
-	var x = missle.x
-    var y = missle.y
-    if (checkMine(board,x - 1, y)) {
-        console.log("hit")
-        return "hit"
-    } else {
-        if (checkMine(board ,x - 1, y - 1)){
-            console.log("there is a mine at north east")
-            return "South"
-        } else {
-            if (checkMine(board,x - 1, y + 1)) {
-                console.log("there is a mine at South east")
-                return "North"
-            } else {
-                console.log("there is nothing")
-                return "Weast"
-            }
-        }
-    }
+function checkMissleWest(board,missle) {
+	var vision=missleVision(board,missle)
+	if(vision[1]===1){
+		return "hit"
+	}
+	if(vision[0]===1&&vision[2]===1){
+		return "East"
+	}
+	if(vision[0]===1){
+		return "South"
+	}
+	if(vision[2]===1){
+		return "North"
+	}
+	else{
+		return "West"
+	}
 }
 
 function insertMineAt(board,x, y) {
@@ -183,8 +172,8 @@ function checkMissle(board,missle) {
         case "East":
             return checkMissleEast(board,missle)
             break;
-        case "Weast":
-            return checkMissleWeast(board,missle)
+        case "West":
+            return checkMissleWest(board,missle)
             break;
         case "hit":
             return missle.direction
@@ -219,12 +208,12 @@ function missleStep(missle) {
                 console.log("you are at the eastest place possible")
                 break;
             }
-        case "Weast":
+        case "West":
             if (x > 0) {
                 x++
                 break
             } else {
-                console.log("you are at the weastest place possible")
+                console.log("you are at the Westest place possible")
                 break;
             }
     }
@@ -255,9 +244,9 @@ function sendMissle( board,missle) {
             }
         }
         missle.direction = checkMissle(board,missle)
-		location = missleStep(missle)+""
+		var location = missleStep(missle)
 		missle.x=location[0]
-		missle.y=loction[1]
+		missle.y=location[1]
         cnt++
         if (missle.direction === "hit") {
             console.log("you hit the target and you move " + cnt + " moves")
@@ -279,20 +268,124 @@ function printLocationOfMissle(missle){
 		case East:
 			x++;
 			break;
-		case Weast:
+		case West:
 			x--;
 			break;
 	}
 	console.log("the loction is: X:"+x+" and Y:"+y)
 }
+function missleVision(board,missle){
+	var array=new Array(3)
+	switch(missle.direction){
+		case "North":
+			if(checkMine(board,missle.x-1,missle.y-1)){
+				array[0]=1
+			}
+			else{
+				array[0]=0
+			}
+			if(checkMine(board,missle.x,missle.y-1)){
+				array[1]=1
+			}
+			else{
+				array[1]=0
+			}
+			if(checkMine(board,missle.x+1,missle.y-1)){
+				array[2]=1
+			}
+			else{
+				array[2]=0
+			}
+			break;
+		case "South":
+			if(checkMine(board,missle.x-1,missle.y+1)){
+				array[0]=1
+			}
+			else{
+				array[0]=0
+			}
+			if(checkMine(board,missle.x,missle.y+1)){
+				array[1]=1
+			}
+			else{
+				array[1]=0
+			}
+			if(checkMine(board,missle.x+1,missle.y+1)){
+				array[2]=1
+			}
+			else{
+				array[2]=0
+			}
+			break;
+		case "East":
+			if(checkMine(board,missle.x+1,missle.y-1)){
+				array[0]=1
+			}
+			else{
+				array[0]=0
+			}
+			if(checkMine(board,missle.x+1,missle.y)){
+				array[1]=1
+			}
+			else{
+				array[1]=0
+			}
+			if(checkMine(board,missle.x+1,missle.y+1)){
+				array[2]=1
+			}
+			else{
+				array[2]=0
+			}
+			break;
+		case "West":
+			if(checkMine(board,missle.x-1,missle.y-1)){
+				array[0]=1
+			}
+			else{
+				array[0]=0
+			}
+			if(checkMine(board,missle.x-1,missle.y)){
+				array[1]=1
+			}
+			else{
+				array[1]=0
+			}
+			if(checkMine(board,missle.x-1,missle.y+1)){
+				array[2]=1
+			}
+			else{
+				array[2]=0
+			}
+			break;
+		}
+	printMissleVision(array)
+	return array
+}
+function printMissleVision(array){
+	var ans=""
+	for(var x=0;x<3;x++){
+		if(x===0){
+			ans=array[0]
+			continue
+		}
+		ans=ans+","+array[x]
+	}
+	console.log(ans)
+	ans="  ^ "
+	console.log(ans)
+}
 var gameBoard = make2DArray()
 cleanBoard(gameBoard)
 printBoard(gameBoard)
-inserMines(gameBoard, 20)
+//inserMines(gameBoard, 20)
 var missle={
-	x:1,
-	y:1,
-	direction:"South"
+	x:3,
+	y:5,
+	direction:"East"
 }
-sendMissle(gameBoard,missle)
-printBoard(gameBoard)
+// console.log()
+// printBoard(gameBoard)
+// sendMissle(gameBoard,missle)
+// printBoard(gameBoard)
+insertMineAt(gameBoard,4,4)
+missleVision(gameBoard,missle)
