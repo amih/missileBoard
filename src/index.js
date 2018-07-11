@@ -268,6 +268,23 @@ function sendMissle(direction,location,board){
 			}	
 	}
 }
+function printLocationOfMissle(x,y,board,direction){
+	switch (direction){
+		case North:
+			y--;
+			break;
+		case South:
+			y++;
+			break;
+		case East:
+			x++;
+			break;
+		case Weast:
+			x--;
+			break;
+	}
+	console.log("the loction is: x:"+x" and y:"+y)
+}
 var gameBoard=make2DArray()
 cleanBoard(gameBoard)
 printBoard(gameBoard)
