@@ -283,7 +283,7 @@ function printLocationOfMissle(x,y,board,direction){
 			x--;
 			break;
 	}
-	console.log("the loction is: x:"+x" and y:"+y)
+	console.log("the loction is: X:"+x" and Y:"+y)
 }
 var gameBoard=make2DArray()
 cleanBoard(gameBoard)
