@@ -447,10 +447,10 @@ function test1MineDirectionSouthMineAtSouthEast() {
     }
     insertMineAt(myBoard, 6, 6)
     var ans = checkMissle(myBoard, missle)
-    if (ans === "East") {
-        console.log("succses to change the direction fron South when the mine is in South West")
+    if (ans === "West") {
+        console.log("succses to change the direction fron South when the mine is in South East")
     } else {
-        console.error("failed to change the direction fron South when the mine is in South west")
+        console.error("failed to change the direction fron South when the mine is in South East")
     }
 }
 
@@ -575,7 +575,7 @@ var missle = {
     // printBoard(gameBoard)
 insertMineAt(gameBoard, 4, 4)
 missleVision(gameBoard, missle)
-var testAll = function() {
+function testAll() {
     test1MineDirectionNorthMineAtNorthWest();
     test1MineDirectionNorthMineAtNorthEast()
     test1MineDirectionNorthHittingTheTarget()
@@ -589,4 +589,4 @@ var testAll = function() {
     test1MineDirectionWestHittingTheTarget()
     test2MinesDirectionWestU_Turn()
     testAddingRandomMinesToBoard()
-}
+}   
