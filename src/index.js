@@ -43,7 +43,7 @@ function checkMine(board, x, y) {
     if (y === -1 || y === 10 || x === -1 || x === 10) {
         return false
     }
-    if (board[y][x] === 0) { // TODO: possible bug? indexes in reverse?
+    if (board[y][x] === 0) { 
         return false
     } else {
         return true
