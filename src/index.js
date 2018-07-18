@@ -1,6 +1,6 @@
 function makeCleanBoard(board) {
     return [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 3, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -13,7 +13,15 @@ function makeCleanBoard(board) {
     ]
 }
 var sumGameBoard = function(board) {
-    return board.reduce((acc, curr) => acc.concat(curr)).reduce((acc, curr) => acc + curr)
+    var cnt=0
+    for(var x=0;x<10;x++){
+        for(var y=0;y<10;y++){
+            if(board[x][y]===1){
+                cnt++
+            }
+        }
+    }
+    return cnt
 }
 
 function insertMine(board) {
@@ -21,17 +29,13 @@ function insertMine(board) {
             x: Math.floor(Math.random() * 10),
             y: Math.floor(Math.random() * 10)
         }
-        // TODO:
-        // 1. what is "t"? Perhaps name it: mineAlreadyFoundFlag
-        // 2. Why do you have: t = !t
-    var t = checkMine(board, m.x, m.y)
-    if (!t) {
-        board[m.x][m.y] = 1
-        t = !t
-        return t
+    var mineAlreadyExsist = checkMine(board, m.x, m.y)
+    if (!mineAlreadyExsist) {
+        board[m.y][m.x] = 1
+        return true;
     } else {
-        t = !t
-        return t
+        mineAlreadyExsist = !mineAlreadyExsist
+        return false;
     }
 }
 
@@ -145,8 +149,9 @@ function insertMineAt(board, x, y) {
 }
 
 function removeMine(board, x, y) {
+    //i called the outter array y and the inner array x
     if (checkMine(board, x, y)) {
-        board[x][y] = 0
+        board[y][x] = 0
         return true
     } else {
         return false
