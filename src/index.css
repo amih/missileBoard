@@ -1,35 +1,31 @@
 body {
   padding-top: 5rem;
+  background-color: aqua
 }
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
 }
-.btnUp{
-  border: 5px solid black;
-  height: 30px;
-  width: 30px;
-  background-color: rgb(91, 50, 205)7, 64)
+.btnN{
+  background-color: chocolate;
+  height: 20px;
+  width: 20px
 }
-.btnDown{
-  border: 5px solid black;
-  height: 30px;
-  width: 30px;
-  background-color: rgb(91, 50, 205)7, 64)
+.btnE{
+  background-color: chocolate;
+  height: 20px;
+  width: 20px
 }
-.btnFirst{
-  border: 5px solid black;
-  height: 30px;
-  width: 30px;
-  background-color: rgb(91, 50, 205)7, 64)
+.btnW{
+  background-color: chocolate;
+  height: 20px;
+  width: 20px
 }
-.btnLast{
-  border: 5px solid black;
-  height: 30px;
-  width: 30px;
-  background-color: rgb(91, 50, 205)7, 64)
+.btnS{
+  background-color: chocolate;
+  height: 20px;
+  width: 20px
 }
-.cell{
-  border: 1px solid black;
-  background-color: rgb(205, 50, 140)
+.table{
+  border: solid 3px plum
 }

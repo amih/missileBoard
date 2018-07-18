@@ -225,19 +225,39 @@ function sendMissle(board, missle) {
         if (cnt != 0) {
             if (x ===9&&hx==8) {
                 console.log("you are at the East borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
-                return "East";
+                var theEnd={
+                    x:missle.x,
+                    y:missle.y,
+                    direction:missle.direction
+                }
+                return theEnd;
             }
             if (y ===9&&hy==8) {
                 console.log("you are at the South borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
-                return "South";
+                var theEnd={
+                    x:missle.x,
+                    y:missle.y,
+                    direction:missle.direction
+                }
+                return theEnd
             }
             if (y === 0&&hy==1) {
                 console.log("you are at the North borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
-                return "North"
+                var theEnd={
+                    x:missle.x,
+                    y:missle.y,
+                    direction:missle.direction
+                }
+                return theEnd
             }
             if (x === 0&&hx==1) {
                 console.log("you are at the West borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
-                return "West";
+                var theEnd={
+                    x:missle.x,
+                    y:missle.y,
+                    direction:missle.direction
+                }
+                return theEnd
             }
         }
         var direction=missle.direction
@@ -410,7 +430,7 @@ function test1MineDirectionNorthHittingTheTarget() {
     }
     insertMineAt(myBoard, 5, 4)
     var ans = checkMissle(myBoard, missle)
-    if (ans === "hit") {
+    if (ans=== "hit") {
         console.log("succses to hit the target")
     } else {
         console.error("failed to hit the target")
@@ -682,4 +702,44 @@ function testAll() {
     test1MineDirectionWestHittingTheTarget()
     test2MinesDirectionWestU_Turn()
     testAddingRandomMinesToBoard()
-}   
+}
+$(".btnN").click(function sendMissleSouth(){
+    var btnx=this.id
+    btnx=btnx.split('N')
+    btnx=btnx[1]
+    var missle={
+        x:btnx,
+        y:-1,
+        direction:"South"
+    }
+})
+$(".btnW").click(function sendMissleSouth(){
+    var btny=this.id
+    btny=btny.split('W')
+    btny=btny[1]
+    var missle={
+        x:-1,
+        y:btny,
+        direction:"East"
+    }
+})
+$(".btnE").click(function sendMissleSouth(){
+    var btny=this.id
+    btny=btny.split('E')
+    btny=btny[1]
+    var missle={
+        x:10,
+        y:btny,
+        direction:"West"
+    }
+})
+$(".btnS").click(function sendMissleSouth(){
+    var btnx=this.id
+    btnx=btnx.split('S')
+    btnx=btnx[1]
+    var missle={
+        x:btnx,
+        y:10,
+        direction:"North"
+    }
+})
