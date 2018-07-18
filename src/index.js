@@ -1,6 +1,6 @@
 function makeCleanBoard(board) {
     return [
-        [0, 3, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -223,31 +223,38 @@ function sendMissle(board, missle) {
         var x = missle.x
         var y = missle.y
         if (cnt != 0) {
-            if (x > board[0].length - 2) {
-                console.log("you are at heaven and you move " + cnt + " moves")
-                break;
+            if (x ===9&&hx==8) {
+                console.log("you are at the East borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
+                return "East";
             }
-            if (y > board[0].length - 2) {
-                console.log("you are at south pole and you move " + cnt + " moves")
-                break;
+            if (y ===9&&hy==8) {
+                console.log("you are at the South borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
+                return "South";
             }
-            if (y < 1) {
-                console.log("you are at the north pole and you move " + cnt + " moves")
-                break;
+            if (y === 0&&hy==1) {
+                console.log("you are at the North borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
+                return "North"
             }
-            if (x < 1) {
-                console.log("you are at hell and you move " + cnt + " moves")
-                break;
+            if (x === 0&&hx==1) {
+                console.log("you are at the West borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
+                return "West";
             }
         }
+        var direction=missle.direction
+        var hx=x
+        var hy=y
         missle.direction = checkMissle(board, missle)
+        if(missle.direction!=direction&&cnt===0){
+            console.log("boom x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
+            return "Boom";
+        }
         var location = missleStep(missle)
         missle.x = location[0]
         missle.y = location[1]
         cnt++
         if (missle.direction === "hit") {
             console.log("you hit the target and you move " + cnt + " moves")
-            break;
+            return "Hit";
         }
     }
 }
@@ -562,24 +569,105 @@ var testAddingRandomMinesToBoard = function() {
     var actualNumberOfMines = sumGameBoard(myBoard)
     if (50 === actualNumberOfMines) {
         console.log("succses to add 50 random mines to board")
+        printBoard(myBoard)
     } else {
         console.error("failed to 50 random mines to board, actualNumberOfMines:", actualNumberOfMines)
         printBoard(myBoard)
     }
 }
-var gameBoard = makeCleanBoard()
-printBoard(gameBoard)
-var missle = {
-        x: 3,
-        y: 5,
-        direction: "East"
+function nextStepIsOutOfTheBoardLines(board,missle){
+    if(missle.x===0){
+        if(missle.direction==="West"){
+            return true
+        }
+        return false
     }
-    // console.log()
-    // printBoard(gameBoard)
-    // sendMissle(gameBoard,missle)
-    // printBoard(gameBoard)
-insertMineAt(gameBoard, 4, 4)
-missleVision(gameBoard, missle)
+    if(missle.y===0){
+        if(missle.direction==="North"){
+            return true
+        }
+        return false
+    }
+    if(missle.x===9){
+        if(missle.direction==="East"){
+            return true
+        }
+        return false
+    }
+    if(missle.y===9){
+        if(missle.direction==="South"){
+            return true
+        }
+        return false
+    }
+    return false
+}
+
+// var gameBoard = makeCleanBoard()
+// printBoard(gameBoard)
+// var missle = {
+//         x: -1,
+//         y: 5,
+//         direction: "East"
+//     }
+
+// printBoard(gameBoard)
+// sendMissle(gameBoard,missle)
+//     // printBoard(gameBoard)
+// insertMineAt(gameBoard, 4, 4)
+// missleVision(gameBoard, missle)
+function testMissleSendFromWestBorderline1mineAtX1Y5(){
+    var myBoard=makeCleanBoard()
+    var missle={
+        x:-1,
+        y:5,
+        direction:"East"
+    }
+    insertMineAt(myBoard,1,5)
+    printBoard(myBoard)
+    var result=sendMissle(myBoard,missle)
+    if(result==="Hit"){
+        console.log("Succses Hit the target")
+    }
+    else(
+        console.log("faild to send the missle")
+    )
+}
+function testMissleSendFromWestBorderline1mineAtX1Y4(){
+    var myBoard=makeCleanBoard()
+    var missle={
+        x:-1,
+        y:5,
+        direction:"East"
+    }
+    insertMineAt(myBoard,1,4)
+    printBoard(myBoard)
+    var result=sendMissle(myBoard,missle)
+    if(result==="South"){
+        console.log("Succses ressponde to sennding the missle form the borderline the target")
+    }
+    else(
+        console.log("faild to send the missle")
+    )
+}
+function testMissleSendFromWestBorderline1mineAtX1Y6(){
+    var myBoard=makeCleanBoard()
+    var missle={
+        x:-1,
+        y:5,
+        direction:"East"
+    }
+    insertMineAt(myBoard,1,6)
+    printBoard(myBoard)
+    var result=sendMissle(myBoard,missle)
+    if(result==="North"){
+        console.log("Succses ressponde to sennding the missle form the borderline the target")
+    }
+    else(
+        console.log("faild to send the missle")
+    )
+}
+
 function testAll() {
     test1MineDirectionNorthMineAtNorthWest();
     test1MineDirectionNorthMineAtNorthEast()
