@@ -177,42 +177,66 @@ function checkMissle(board, missle) {
     }
 }
 
-function missleStep(missle) {
+function missleStep(missle,cnt) {
     var x = missle.x
     var y = missle.y
     switch (missle.direction) {
         case "North":
-            if (y > 0) {
-                y--
-                break;
-            } else {
-                console.log("you are at the northest place possible")
-                break;
-            }
+            if(cnt!=0){
+                if (y > 0) {
+                    y--
+                    break;
+                } else {
+                    console.log("you are at the northest place possible")
+                    break;
+                   }
+                }
+                else{
+                    y--
+                    break;
+                }
         case "South":
-            if (y < 9) {
-                y++
-                break;
-            } else {
-                console.log("you are at the southest place possible")
-                break;
-            }
+           if(cnt!=0){
+                if (y < 9) {
+                    y++
+                    break;
+                } else {
+                    console.log("you are at the southest place possible")
+                    break;
+                    }
+                }
+                else{
+                    y++
+                    break;
+                }
         case "East":
-            if (x < 9) {
-                x++
-                break;
-            } else {
-                console.log("you are at the eastest place possible")
-                break;
-            }
+            if(cnt!=0){
+                if (x < 9) {
+                    x++
+                    break;
+                } else {
+                    console.log("you are at the eastest place possible")
+                    break;
+                    }
+                }
+                else{
+                    x++
+                    break;
+                }
         case "West":
-            if (x > 0) {
-                x++
-                break
-            } else {
-                console.log("you are at the Westest place possible")
-                break;
-            }
+            if(cnt!=0){
+                if (x > 0) {
+                    x--
+                    break;
+                } else {
+                    console.log("you are at the Westest place possible")
+                    break;
+                    }
+                }
+                else{
+                    x--
+                    break;
+                }   
     }
     return [x, y]
 }
@@ -223,7 +247,7 @@ function sendMissle(board, missle) {
         var x = missle.x
         var y = missle.y
         if (cnt != 0) {
-            if (x ===9&&hx==8) {
+            if (x ===9&&historyX==8) {
                 console.log("you are at the East borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
                 var theEnd={
                     x:missle.x,
@@ -232,7 +256,7 @@ function sendMissle(board, missle) {
                 }
                 return theEnd;
             }
-            if (y ===9&&hy==8) {
+            if (y ===9&&historyY==8) {
                 console.log("you are at the South borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
                 var theEnd={
                     x:missle.x,
@@ -241,7 +265,7 @@ function sendMissle(board, missle) {
                 }
                 return theEnd
             }
-            if (y === 0&&hy==1) {
+            if (y === 0&&historyY==1) {
                 console.log("you are at the North borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
                 var theEnd={
                     x:missle.x,
@@ -250,7 +274,7 @@ function sendMissle(board, missle) {
                 }
                 return theEnd
             }
-            if (x === 0&&hx==1) {
+            if (x === 0&&historyX==1) {
                 console.log("you are at the West borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
                 var theEnd={
                     x:missle.x,
@@ -261,14 +285,14 @@ function sendMissle(board, missle) {
             }
         }
         var direction=missle.direction
-        var hx=x
-        var hy=y
+        var historyX=x
+        var historyY=y
         missle.direction = checkMissle(board, missle)
         if(missle.direction!=direction&&cnt===0){
             console.log("boom x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
             return "Boom";
         }
-        var location = missleStep(missle)
+        var location = missleStep(missle,cnt)
         missle.x = location[0]
         missle.y = location[1]
         cnt++
@@ -693,6 +717,7 @@ $(".btnN").click(function sendMissleSouth(){
     var btnx=this.id
     btnx=btnx.split('N')
     btnx=btnx[1]
+    btnx=parseInt(btnx)
     var missle={
         x:btnx,
         y:-1,
