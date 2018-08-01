@@ -622,20 +622,6 @@ function nextStepIsOutOfTheBoardLines(board,missle){
     }
     return false
 }
-
-// var gameBoard = makeCleanBoard()
-// printBoard(gameBoard)
-// var missle = {
-//         x: -1,
-//         y: 5,
-//         direction: "East"
-//     }
-
-// printBoard(gameBoard)
-// sendMissle(gameBoard,missle)
-//     // printBoard(gameBoard)
-// insertMineAt(gameBoard, 4, 4)
-// missleVision(gameBoard, missle)
 function testMissleSendFromWestBorderline1mineAtX1Y5(){
     var myBoard=makeCleanBoard()
     var missle={
@@ -712,6 +698,8 @@ $(".btnN").click(function sendMissleSouth(){
         y:-1,
         direction:"South"
     }
+    // printBoard(gameBoard)
+    // sendMissle(gameBoard,missle)
 })
 $(".btnW").click(function sendMissleSouth(){
     var btny=this.id
@@ -722,6 +710,7 @@ $(".btnW").click(function sendMissleSouth(){
         y:btny,
         direction:"East"
     }
+    // sendMissle(gameBoard,missle)
 })
 $(".btnE").click(function sendMissleSouth(){
     var btny=this.id
@@ -732,6 +721,7 @@ $(".btnE").click(function sendMissleSouth(){
         y:btny,
         direction:"West"
     }
+    // sendMissle(gameBoard,missle)
 })
 $(".btnS").click(function sendMissleSouth(){
     var btnx=this.id
@@ -742,4 +732,10 @@ $(".btnS").click(function sendMissleSouth(){
         y:10,
         direction:"North"
     }
+    // sendMissle(gameBoard,missle)
 })
+// var gameBoard
+// window.onload = function() {
+//     gameBoard=makeCleanBoard()
+//     printBoard(gameBoard)
+//   };
