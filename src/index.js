@@ -698,8 +698,9 @@ $(".btnN").click(function sendMissleSouth(){
         y:-1,
         direction:"South"
     }
-    // printBoard(gameBoard)
-    // sendMissle(gameBoard,missle)
+    var gameBoard=makeCleanBoard()
+    printBoard(gameBoard)
+    sendMissle(gameBoard,missle)
 })
 $(".btnW").click(function sendMissleSouth(){
     var btny=this.id
