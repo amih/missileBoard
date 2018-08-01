@@ -240,8 +240,55 @@ function missleStep(missle,cnt) {
     }
     return [x, y]
 }
-
-function sendMissle(board, missle) {
+function fromButton(missile){
+    if(missile.fromX===-1){
+        missile.x=missile.fromX
+        missile.y=missile.fromY
+        missile.direction="West"
+    }
+    if(missile.fromX===10){
+        missile.x=missile.fromX
+        missile.y=missile.fromY
+        missile.direction="East"
+    }
+    if(missile.fromY===-1){
+        missile.x=missile.fromX
+        missile.y=missile.fromY
+        missile.direction="North"
+    }
+    if(missile.fromY===10){
+        missile.x=missile.fromX
+        missile.y=missile.fromY
+        missile.direction="South"
+    }
+    var button=toButton(missile)
+    return button;
+}
+function toButton(missile){
+    var button=missile.direction.charAt(0)
+    button=button.toUpperCase()
+    switch(missile.direction){
+        case "North":
+            button="btn"+button+missile.x
+            break;
+        case "South":
+            button="btn"+button+missile.x
+            break;
+        case "East":
+            button="btn"+button+missile.y
+            break;
+        case "West":
+            button="btn"+button+missile.y
+            break;
+    }
+    return button
+}
+function enterTryNumber(buttonStart,buttonEnd,cntTry){
+    $("#"+buttonStart).html(cntTry)
+    $("#"+buttonEnd).html(cntTry)
+    return true;
+}
+function sendMissle(board, missle,cntTry) {
     var cnt = 0
     while (true) {
         var x = missle.x
@@ -254,7 +301,10 @@ function sendMissle(board, missle) {
                     y:missle.y,
                     direction:missle.direction
                 }
-                return theEnd;
+                var buttonEnd=toButton(missle)
+                var buttonStart=fromButton(missle)
+                enterTryNumber(buttonStart,buttonEnd,cntTry)
+                return buttonEnd;
             }
             if (y ===9&&historyY==8) {
                 console.log("you are at the South borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
@@ -263,7 +313,10 @@ function sendMissle(board, missle) {
                     y:missle.y,
                     direction:missle.direction
                 }
-                return theEnd
+                var buttonEnd=toButton(missle)
+                var buttonStart=fromButton(missle)
+                enterTryNumber(buttonStart,buttonEnd,cntTry)
+                return buttonEnd
             }
             if (y === 0&&historyY==1) {
                 console.log("you are at the North borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
@@ -272,7 +325,10 @@ function sendMissle(board, missle) {
                     y:missle.y,
                     direction:missle.direction
                 }
-                return theEnd
+                var buttonEnd=toButton(missle)
+                var buttonStart=fromButton(missle)
+                enterTryNumber(buttonStart,buttonEnd,cntTry)
+                return buttonEnd
             }
             if (x === 0&&historyX==1) {
                 console.log("you are at the West borderline of the board x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
@@ -281,7 +337,10 @@ function sendMissle(board, missle) {
                     y:missle.y,
                     direction:missle.direction
                 }
-                return theEnd
+                var buttonEnd=toButton(missle)
+                var buttonStart=fromButton(missle)
+                enterTryNumber(buttonStart,buttonEnd,cntTry)
+                return buttonEnd
             }
         }
         var direction=missle.direction
@@ -290,7 +349,10 @@ function sendMissle(board, missle) {
         missle.direction = checkMissle(board, missle)
         if(missle.direction!=direction&&cnt===0){
             console.log("boom x:"+missle.x +" y:"+missle.y+" and you move " + cnt + " moves")
-            return "Boom";
+            var buttonEnd=toButton(missle)
+            var buttonStart=fromButton(missle)
+            enterTryNumber(buttonStart,buttonEnd,cntTry)
+            return buttonEnd;
         }
         var location = missleStep(missle,cnt)
         missle.x = location[0]
@@ -298,7 +360,10 @@ function sendMissle(board, missle) {
         cnt++
         if (missle.direction === "hit") {
             console.log("you hit the target and you move " + cnt + " moves")
-            return "Hit";
+            var buttonEnd=toButton(missle)
+            var buttonStart=fromButton(missle)
+            enterTryNumber(buttonStart,buttonEnd,cntTry)
+            return buttonEnd;
         }
     }
 }
@@ -697,7 +762,6 @@ function testMissleSendFromWestBorderline1mineAtX1Y6(){
         console.log("faild to send the missle")
     )
 }
-
 function testAll() {
     test1MineDirectionNorthMineAtNorthWest();
     test1MineDirectionNorthMineAtNorthEast()
@@ -714,54 +778,70 @@ function testAll() {
     testAddingRandomMinesToBoard()
 }
 $(".btnN").click(function sendMissleSouth(){
+    cntTry++
     var btnx=this.id
     btnx=btnx.split('N')
     btnx=btnx[1]
     btnx=parseInt(btnx)
     var missle={
+        fromX:btnx,
+        fromY:-1,
         x:btnx,
         y:-1,
         direction:"South"
     }
-    var gameBoard=makeCleanBoard()
-    printBoard(gameBoard)
-    sendMissle(gameBoard,missle)
+    sendMissle(gameBoard,missle,cntTry)
 })
 $(".btnW").click(function sendMissleSouth(){
+    cntTry++
     var btny=this.id
     btny=btny.split('W')
     btny=btny[1]
+    btny=parseInt(btny)
     var missle={
+        fromX:-1,
+        fromY:btny,
         x:-1,
         y:btny,
         direction:"East"
     }
-    // sendMissle(gameBoard,missle)
+     sendMissle(gameBoard,missle,cntTry)
 })
 $(".btnE").click(function sendMissleSouth(){
+    cntTry++
     var btny=this.id
     btny=btny.split('E')
     btny=btny[1]
+    btny=parseInt(btny)
     var missle={
+        fromX:10,
+        fromY:btny,
         x:10,
         y:btny,
         direction:"West"
     }
-    // sendMissle(gameBoard,missle)
+     sendMissle(gameBoard,missle,cntTry)
 })
 $(".btnS").click(function sendMissleSouth(){
+    cntTry++
     var btnx=this.id
     btnx=btnx.split('S')
     btnx=btnx[1]
+    btnx=parseInt(btnx)
     var missle={
+        fromX:btnx,
+        fromY:10,
         x:btnx,
         y:10,
         direction:"North"
     }
-    // sendMissle(gameBoard,missle)
+     sendMissle(gameBoard,missle,cntTry)
 })
-// var gameBoard
-// window.onload = function() {
-//     gameBoard=makeCleanBoard()
-//     printBoard(gameBoard)
-//   };
+ var gameBoard
+ var cntTry
+ window.onload = function() {
+     gameBoard=makeCleanBoard()
+     insertMines(gameBoard,99)
+     printBoard(gameBoard)
+     cntTry=0
+   };
