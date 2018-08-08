@@ -217,27 +217,34 @@ function missleStep(missle) {
     return [x, y]
 }
 function fromButton(missile){
-    if(missile.fromX===-1){
-        missile.x=missile.fromX
-        missile.y=missile.fromY
-        missile.direction="West"
+    innerMissile={
+        fromX:missile.fromX,
+        fromY:missile.fromY,
+        x:missile.x,
+        y:missile.y,
+        direction:missile.direction
     }
-    if(missile.fromX===10){
-        missile.x=missile.fromX
-        missile.y=missile.fromY
-        missile.direction="East"
+    if(innerMissile.fromX===-1){
+        innerMissile.x=innerMissile.fromX
+        innerMissile.y=innerMissile.fromY
+        innerMissile.direction="West"
     }
-    if(missile.fromY===-1){
-        missile.x=missile.fromX
-        missile.y=missile.fromY
-        missile.direction="North"
+    if(innerMissile.fromX===10){
+        innerMissile.x=innerMissile.fromX
+        innerMissile.y=innerMissile.fromY
+        innerMissile.direction="East"
     }
-    if(missile.fromY===10){
-        missile.x=missile.fromX
-        missile.y=missile.fromY
-        missile.direction="South"
+    if(innerMissile.fromY===-1){
+        innerMissile.x=innerMissile.fromX
+        innerMissile.y=innerMissile.fromY
+        innerMissile.direction="North"
     }
-    var button=toButton(missile)
+    if(innerMissile.fromY===10){
+        innerMissile.x=innerMissile.fromX
+        innerMissile.y=innerMissile.fromY
+        innerMissile.direction="South"
+    }
+    var button=toButton(innerMissile)
     return button;
 }
 function toButton(missile){
@@ -302,7 +309,7 @@ function enterUTurn(button){
 function enterHit(button){
     $("#"+button).html("X")
 }
-function showExit(missle,uTurn,cntTry){
+function showExit(missle,uTurn,cntTry,hitTheTarget){
     if(uTurn){
         if(missle.x==missle.fromX&&missle.y==missle.fromY){
             var button=fromButton(missle)
@@ -310,7 +317,7 @@ function showExit(missle,uTurn,cntTry){
             return true
         }
         else{
-            if(missle.direction!="hit"){
+            if(hitTheTarget!==true){
                 var btnStart=fromButton(missle)
                 var btnEnd= toButton(missle)
                 enterTryNumber(btnStart,btnEnd,cntTry)
@@ -322,7 +329,7 @@ function showExit(missle,uTurn,cntTry){
         }
     }
     else{
-        if(missle.direction!="hit"){
+        if(hitTheTarget!=true){
             var btnStart=fromButton(missle)
             var btnEnd= toButton(missle)
             enterTryNumber(btnStart,btnEnd,cntTry)
@@ -333,110 +340,191 @@ function showExit(missle,uTurn,cntTry){
         }
     }
 }
+function checkHit(board,missile){
+    var direction=checkMissle(board,missile)
+    if(direction=="hit"){
+        return true
+    }
+    else{
+        return false
+    }
+}
+function checkUTurn(board,missle){
+    switch(direction){
+        case "North":
+            var direction=checkMissle(gameBoard,missle)
+            if(directio=="South"){
+                return true
+            }  
+            return false
+            
+    }
+}
 function sendMissle(board, missle,cntTry) {
     var cnt=0
+    var firsttime=true
+    var fromDirection
+    var hitTheTarget=false
     var haveDoneUTurn=false
     while(!onBorderAndGoingOut(missle)||cnt==0){
+        if(cnt!=0){
+            firsttime=false
+        }
         switch(missle.direction){
         case "North":
-            if(!onBorderAndGoingOut(missle)){
-                missle.direction=checkMissle(board,missle)
-                if(onBorderCantEnter(missle)){
-                    if(!onBorderHit(missle)){
-                        var fromDirection=missle.direction
-                        missle.direction="U"
-                        missle=doUTurn(missle,fromDirection)
-                        haveDoneUTurn=true;
-                    }
-                    else{
-                        missle.direction="hit"
-                    }
+        if(!onBorderAndGoingOut(missle)){
+            var fromDirection=missle.direction
+            missle.direction=checkMissle(board,missle)
+               if(outBorderCantEnter(missle)){
+                if(!onBorderHit(missle))
+                {
+                    missle.direction="U"
+                    missle=doUTurn(missle,fromDirection)
+                    haveDoneUTurn=true;
                 }
+                else{
+                    hitTheTarget=true
+                    missle.direction=fromDirection
+                }
+            }
+        else{
+            if(checkHit(board,missle)){
+                missle.direction=fromDirection
+                hitTheTarget=true
+            }
+            else{
+                if(outBoardAndDontEnter(missle,firsttime)){
+                    missle.direction="South"
+                    haveDoneUTurn=true;
+                }
+
                 else{
                     var destenation=missleStep(missle)
                     missle.x=destenation[0]
                     missle.y=destenation[1]
                 }
             }
-            break;
+        }
+    }
+        break;
         case "South":
             if(!onBorderAndGoingOut(missle)){
+                var fromDirection=missle.direction
                 missle.direction=checkMissle(board,missle)
-                if(onBorderCantEnter(missle)){
+                   if(outBorderCantEnter(missle)){
                     if(!onBorderHit(missle))
                     {
-                         var fromDirection=missle.direction
                         missle.direction="U"
                         missle=doUTurn(missle,fromDirection)
                         haveDoneUTurn=true;
                     }
                     else{
-                        missle.direction='hit'
+                        hitTheTarget=true
+                        missle.direction=fromDirection
                     }
                 }
+            else{
+                if(checkHit(board,missle)){
+                    missle.direction=fromDirection
+                    hitTheTarget=true
+                }
                 else{
-                    var destenation=missleStep(missle)
-                    missle.x=destenation[0]
-                    missle.y=destenation[1]
-                }  
+                    if(outBoardAndDontEnter(missle,firsttime)){
+                        missle.direction="North"
+                        haveDoneUTurn=true;
+                    }
+                    else{
+                        var destenation=missleStep(missle)
+                        missle.x=destenation[0]
+                        missle.y=destenation[1]
+                    }
+                }
             }
+        }
             break;
         case "East":
-            if(!onBorderAndGoingOut(missle)){
+                if(!onBorderAndGoingOut(missle)){
+                var fromDirection=missle.direction
                 missle.direction=checkMissle(board,missle)
-                if(onBorderCantEnter(missle)){
+                   if(outBorderCantEnter(missle)){
                     if(!onBorderHit(missle))
                     {
-                         var fromDirection=missle.direction
                         missle.direction="U"
                         missle=doUTurn(missle,fromDirection)
                         haveDoneUTurn=true;
                     }
                     else{
-                        missle.direction='hit'
+                        hitTheTarget=true
+                        missle.direction=fromDirection
                     }
                 }
-                else{
-                    var destenation=missleStep(missle)
-                    missle.x=destenation[0]
-                    missle.y=destenation[1]
+            else{
+                if(checkHit(board,missle)){
+                    missle.direction=fromDirection
+                    hitTheTarget=true
                 }
-            }  
+                else{
+                    if(outBoardAndDontEnter(missle,firsttime)){
+                        missle.direction="West"
+                        haveDoneUTurn=true;
+                    }
+                    else{
+                        var destenation=missleStep(missle)
+                        missle.x=destenation[0]
+                        missle.y=destenation[1]
+                    }
+                }
+            }
+        }
             break;
         case "West":
-            if(!onBorderAndGoingOut(missle)){
-                missle.direction=checkMissle(board,missle)
-                if(onBorderCantEnter(missle)){
-                    if(!onBorderHit(missle))
-                    {
-                         var fromDirection=missle.direction
-                        missle.direction="U"
-                        missle=doUTurn(missle,fromDirection)
-                        haveDoneUTurn=true;
-                    }
-                    else{
-                        missle.direction='hit'
-                    }
+        if(!onBorderAndGoingOut(missle)){
+            var fromDirection=missle.direction
+            missle.direction=checkMissle(board,missle)
+               if(outBorderCantEnter(missle)){
+                if(!onBorderHit(missle))
+                {
+                    missle.direction="U"
+                    missle=doUTurn(missle,fromDirection)
+                    haveDoneUTurn=true;
+                }
+                else{
+                    hitTheTarget=true
+                    missle.direction=fromDirection
+                }
+            }
+        else{
+            if(checkHit(board,missle)){
+                missle.direction=fromDirection
+                hitTheTarget=true
+            }
+            else{
+                if(outBoardAndDontEnter(missle,firsttime)){
+                    missle.direction="East"
+                    haveDoneUTurn=true;
                 }
                 else{
                     var destenation=missleStep(missle)
                     missle.x=destenation[0]
                     missle.y=destenation[1]
                 }
-            }  
+            }
+        }
+    }
+        break;  
             break;
         }
-        if(onBorderAndGoingOut(missle)||outBoardAndDontEnter(missle)||missle.direction=="hit"){
+        if(onBorderAndGoingOut(missle)||outBoardAndDontEnter(missle,firsttime)||hitTheTarget==true){
             break;
         }
     }
-    showExit(missle,haveDoneUTurn,cntTry)
+    showExit(missle,haveDoneUTurn,cntTry,hitTheTarget)
 }
-function outBoardAndDontEnter(missle){
-    if(missle.y==-1&&missle.direction!="South"){return true}
-    if(missle.y==10&&missle.direction!="North"){return true}
-    if(missle.x==0&&missle.direction!="East"){return true}
-    if(missle.x==9&&missle.direction!="West"){return true}
+function outBoardAndDontEnter(missle,firsttime){
+    if(missle.y==-1&&missle.direction!="South"&&firsttime){return true}
+    if(missle.y==10&&missle.direction!="North"&&firsttime){return true}
+    if(missle.x==-1&&missle.direction!="East"&&firsttime){return true}
+    if(missle.x==10&&missle.direction!="West"&&firsttime){return true}
     return false
 }
 function onBorderAndGoingOut(missle){
@@ -446,7 +534,7 @@ function onBorderAndGoingOut(missle){
     if(missle.x==9&&missle.direction=="East"){return true}
     return false;
 }
-function onBorderCantEnter(missle){
+function outBorderCantEnter(missle){
     if(missle.y==-1&&missle.direction!='South'){return true}
     if(missle.y==10&&missle.direction!='North'){return true}
     if(missle.x==-1&&missle.direction!='East'){return true}
@@ -933,7 +1021,7 @@ $(".btnS").click(function sendMissleSouth(){
  var cntTry
  window.onload = function() {
      gameBoard=makeCleanBoard()
-     insertMines(gameBoard,0)
+     insertMines(gameBoard,10)
      printBoard(gameBoard)
      cntTry=0
    }
