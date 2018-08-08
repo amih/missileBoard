@@ -657,6 +657,10 @@ function printMissleVision(array) {
     ans = "  ^ "
     console.log(ans)
 }
+function addToHistory(button,cntTry,history){
+    history[cntTry]=button
+    return true
+}
 
 function test1MineDirectionNorthMineAtNorthWest() {
     var myBoard = makeCleanBoard()
@@ -1017,11 +1021,46 @@ $(".btnS").click(function sendMissleSouth(){
     }
      sendMissle(gameBoard,missle,cntTry)
 })
+$(".table").click(function signAsMine(){
+    mine= new Array(2)
+    var mines=this.id
+    minex=parseInt(mines.charAt(2))
+    miney=parseInt(mines.charAt(3))
+    mine[0]=minex
+    mine[1]=miney
+    mineList[cntMine]=mine
+    cntMine++
+    $("#"+this.id).html("!!!!")
+})
+$("#finish").click(function endGame(){
+    var ans=true
+    for(var x=0;x<mineList.length;x++){
+        if(!checkMine(gameBoard,mineList[x][0],mineList[x][1])){
+            ans=false;
+            break;
+        }
+    }
+    if(ans){
+        alert("You Are The Best Winner")
+    }
+    else{
+        alert("Better Luck Next Time")
+    }
+})
+$("#refresh").click(function refresh(){
+    location.reload(true)
+})
+var cntMine=0
+var mineList
  var gameBoard
+ var history
  var cntTry
  window.onload = function() {
+     var numMine=1
      gameBoard=makeCleanBoard()
-     insertMines(gameBoard,10)
+     insertMines(gameBoard,numMine)
      printBoard(gameBoard)
      cntTry=0
+     history=new Array(41)
+     mineList=new Array(numMine)
    }
