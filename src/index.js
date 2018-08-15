@@ -514,6 +514,8 @@ function sendMissle(board, missle,cntTry) {
         break;  
             break;
         }
+        var location="xy"+missle.x+missle.y
+        moves[cntTry].push(location)
         if(onBorderAndGoingOut(missle)||outBoardAndDontEnter(missle,firsttime)||hitTheTarget==true){
             break;
         }
@@ -661,7 +663,15 @@ function addToHistory(button,cntTry,history){
     history[cntTry]=button
     return true
 }
-
+function cleanBoardAndMakeAStep(id){
+    $(".table").css("background-color","aqua")
+    $("#"+id).css("background-color","red")
+}
+function replay1try(callBack){
+    cleanBoardAndMakeAStep(moves[x][num])
+    if(++num==moves[x].length){return console.log("yay")}
+    window.setTimeout(replay1try,500)
+}
 function test1MineDirectionNorthMineAtNorthWest() {
     var myBoard = makeCleanBoard()
     var missle = {
@@ -823,7 +833,6 @@ function test1MineDirectionWestMineAtSouthWest() {
         console.error("failed to change direction from West when the mine is in South West")
     }
 }
-
 function test1MineDirectionWestHittingTheTarget() {
     var myBoard = makeCleanBoard()
     var missle = {
@@ -962,7 +971,7 @@ function testAll() {
     testAddingRandomMinesToBoard()
 }
 $(".btnN").click(function sendMissleSouth(){
-    cntTry++
+    moves.push([])
     var btnx=this.id
     btnx=btnx.split('N')
     btnx=btnx[1]
@@ -975,9 +984,10 @@ $(".btnN").click(function sendMissleSouth(){
         direction:"South"
     }
     sendMissle(gameBoard,missle,cntTry)
+    cntTry++
 })
 $(".btnW").click(function sendMissleSouth(){
-    cntTry++
+    moves.push([])
     var btny=this.id
     btny=btny.split('W')
     btny=btny[1]
@@ -990,9 +1000,10 @@ $(".btnW").click(function sendMissleSouth(){
         direction:"East"
     }
      sendMissle(gameBoard,missle,cntTry)
+     cntTry++
 })
 $(".btnE").click(function sendMissleSouth(){
-    cntTry++
+    moves.push([])
     var btny=this.id
     btny=btny.split('E')
     btny=btny[1]
@@ -1005,9 +1016,10 @@ $(".btnE").click(function sendMissleSouth(){
         direction:"West"
     }
      sendMissle(gameBoard,missle,cntTry)
+     cntTry++
 })
 $(".btnS").click(function sendMissleSouth(){
-    cntTry++
+    moves.push([])
     var btnx=this.id
     btnx=btnx.split('S')
     btnx=btnx[1]
@@ -1020,6 +1032,7 @@ $(".btnS").click(function sendMissleSouth(){
         direction:"North"
     }
      sendMissle(gameBoard,missle,cntTry)
+     cntTry++
 })
 $(".table").click(function signAsMine(){
     mine= new Array(2)
@@ -1031,6 +1044,11 @@ $(".table").click(function signAsMine(){
     mineList[cntMine]=mine
     cntMine++
     $("#"+this.id).html("!!!!")
+})
+$("#replay").click( function showReplay(){
+    num=0
+    x=0
+    replay1try()
 })
 $("#finish").click(function endGame(){
     var ans=true
@@ -1051,16 +1069,17 @@ $("#refresh").click(function refresh(){
     location.reload(true)
 })
 var cntMine=0
+var num=0
 var mineList
  var gameBoard
- var history
+ var moves
  var cntTry
  window.onload = function() {
-     var numMine=1
+    moves=[]
+    var numMine=1
      gameBoard=makeCleanBoard()
      insertMines(gameBoard,numMine)
      printBoard(gameBoard)
      cntTry=0
-     history=new Array(41)
      mineList=new Array(numMine)
    }
