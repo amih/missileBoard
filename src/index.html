@@ -6,458 +6,178 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Starter Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href=index.css rel="stylesheet">
-    <!-- Custom styles for this template -->
-
+    <title>Missile Board Game</title>
+  	<link href=index.css rel="stylesheet">
   </head>
-
   <body>
     <div>
       <table id="gameTable">
         <tr id="line0">
-          <td>
-          </td>
-          <td>
-            <button id="btnN0" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN1" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN2" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN3" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN4" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN5" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN6" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN7" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN8" class="btnN"></button>
-          </td>
-          <td>
-            <button id="btnN9" class="btnN"></button>
-          </td>
-          <td> </td>
+          <td></td>
+          <td><button id="btnN0" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN1" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN2" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN3" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN4" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN5" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN6" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN7" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN8" class="btnLaunchers btnN"></button></td>
+          <td><button id="btnN9" class="btnLaunchers btnN"></button></td>
+          <td></td>
         </tr>
         <tr id="line1">
-          <td>
-            <button id="btnW0" class="btnW"></button>
-          </td>
-          <td>
-            <div id="xy00" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy10" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy20" class="row0 table">XX</div>
-          <td>
-            <div id="xy30" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy40" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy50" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy60" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy70" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy80" class="row0 table">XX</div>
-          </td>
-          <td>
-            <div id="xy90" class="row0 table">XX</div>
-          </td>
-          <td>
-              <button id="btnE0" class="btnE"></button>
-          </td>
+          <td><button id="btnW0" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy00" class="row0 table">XX</div></td>
+          <td><div id="xy10" class="row0 table">XX</div></td>
+          <td><div id="xy20" class="row0 table">XX</div></td>
+          <td><div id="xy30" class="row0 table">XX</div></td>
+          <td><div id="xy40" class="row0 table">XX</div></td>
+          <td><div id="xy50" class="row0 table">XX</div></td>
+          <td><div id="xy60" class="row0 table">XX</div></td>
+          <td><div id="xy70" class="row0 table">XX</div></td>
+          <td><div id="xy80" class="row0 table">XX</div></td>
+          <td><div id="xy90" class="row0 table">XX</div></td>
+          <td><button id="btnE0" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line2">
-            <td>
-                <button id="btnW1" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy01" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy11" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy21" class="row1 table">XX</div>
-              <td>
-                <div id="xy31" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy41" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy51" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy61" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy71" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy81" class="row1 table">XX</div>
-              </td>
-              <td>
-                <div id="xy91" class="row1 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE1" class="btnE"></button>
-              </td>
+          <td><button id="btnW1" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy01" class="row1 table">XX</div></td>
+          <td><div id="xy11" class="row1 table">XX</div></td>
+          <td><div id="xy21" class="row1 table">XX</div></td>
+          <td><div id="xy31" class="row1 table">XX</div></td>
+          <td><div id="xy41" class="row1 table">XX</div></td>
+          <td><div id="xy51" class="row1 table">XX</div></td>
+          <td><div id="xy61" class="row1 table">XX</div></td>
+          <td><div id="xy71" class="row1 table">XX</div></td>
+          <td><div id="xy81" class="row1 table">XX</div></td>
+          <td><div id="xy91" class="row1 table">XX</div></td>
+          <td><button id="btnE1" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line3">
-            <td>
-                <button id="btnW2" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy02" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy12" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy22" class="row2 table">XX</div>
-              <td>
-                <div id="xy32" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy42" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy52" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy62" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy72" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy82" class="row2 table">XX</div>
-              </td>
-              <td>
-                <div id="xy92" class="row2 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE2" class="btnE"></button>
-              </td>
+          <td><button id="btnW2" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy02" class="row2 table">XX</div></td>
+          <td><div id="xy12" class="row2 table">XX</div></td>
+          <td><div id="xy22" class="row2 table">XX</div></td>
+          <td><div id="xy32" class="row2 table">XX</div></td>
+          <td><div id="xy42" class="row2 table">XX</div></td>
+          <td><div id="xy52" class="row2 table">XX</div></td>
+          <td><div id="xy62" class="row2 table">XX</div></td>
+          <td><div id="xy72" class="row2 table">XX</div></td>
+          <td><div id="xy82" class="row2 table">XX</div></td>
+          <td><div id="xy92" class="row2 table">XX</div></td>
+          <td><button id="btnE2" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line4">
-            <td>
-                <button id="btnW3" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy03" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy13" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy23" class="row3 table">XX</div>
-              <td>
-                <div id="xy33" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy43" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy53" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy63" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy73" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy83" class="row3 table">XX</div>
-              </td>
-              <td>
-                <div id="xy93" class="row3 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE3" class="btnE"></button>
-              </td>
+          <td><button id="btnW3" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy03" class="row3 table">XX</div></td>
+          <td><div id="xy13" class="row3 table">XX</div></td>
+          <td><div id="xy23" class="row3 table">XX</div></td>
+          <td><div id="xy33" class="row3 table">XX</div></td>
+          <td><div id="xy43" class="row3 table">XX</div></td>
+          <td><div id="xy53" class="row3 table">XX</div></td>
+          <td><div id="xy63" class="row3 table">XX</div></td>
+          <td><div id="xy73" class="row3 table">XX</div></td>
+          <td><div id="xy83" class="row3 table">XX</div></td>
+          <td><div id="xy93" class="row3 table">XX</div></td>
+          <td><button id="btnE3" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line5">
-            <td>
-                <button id="btnW4" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy04" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy14" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy24" class="row4 table">XX</div>
-              <td>
-                <div id="xy34" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy44" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy54" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy64" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy74" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy84" class="row4 table">XX</div>
-              </td>
-              <td>
-                <div id="xy94" class="row4 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE4" class="btnE"></button>
-              </td>
+          <td><button id="btnW4" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy04" class="row4 table">XX</div></td>
+          <td><div id="xy14" class="row4 table">XX</div></td>
+          <td><div id="xy24" class="row4 table">XX</div></td>
+          <td><div id="xy34" class="row4 table">XX</div></td>
+          <td><div id="xy44" class="row4 table">XX</div></td>
+          <td><div id="xy54" class="row4 table">XX</div></td>
+          <td><div id="xy64" class="row4 table">XX</div></td>
+          <td><div id="xy74" class="row4 table">XX</div></td>
+          <td><div id="xy84" class="row4 table">XX</div></td>
+          <td><div id="xy94" class="row4 table">XX</div></td>
+          <td><button id="btnE4" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line6">
-            <td>
-                <button id="btnW5" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy05" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy15" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy25" class="row5 table">XX</div>
-              <td>
-                <div id="xy35" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy45" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy55" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy65" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy75" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy85" class="row5 table">XX</div>
-              </td>
-              <td>
-                <div id="xy95" class="row5 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE5" class="btnE"></button>
-              </td>
+          <td><button id="btnW5" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy05" class="row5 table">XX</div></td>
+          <td><div id="xy15" class="row5 table">XX</div></td>
+          <td><div id="xy25" class="row5 table">XX</div></td>
+          <td><div id="xy35" class="row5 table">XX</div></td>
+          <td><div id="xy45" class="row5 table">XX</div></td>
+          <td><div id="xy55" class="row5 table">XX</div></td>
+          <td><div id="xy65" class="row5 table">XX</div></td>
+          <td><div id="xy75" class="row5 table">XX</div></td>
+          <td><div id="xy85" class="row5 table">XX</div></td>
+          <td><div id="xy95" class="row5 table">XX</div></td>
+          <td><button id="btnE5" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line7">
-            <td>
-                <button id="btnW6" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy06" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy16" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy26" class="row6 table">XX</div>
-              <td>
-                <div id="xy36" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy46" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy56" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy66" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy76" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy86" class="row6 table">XX</div>
-              </td>
-              <td>
-                <div id="xy96" class="row6 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE6" class="btnE"></button>
-              </td>
+          <td><button id="btnW6" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy06" class="row6 table">XX</div></td>
+          <td><div id="xy16" class="row6 table">XX</div></td>
+          <td><div id="xy26" class="row6 table">XX</div></td>
+          <td><div id="xy36" class="row6 table">XX</div></td>
+          <td><div id="xy46" class="row6 table">XX</div></td>
+          <td><div id="xy56" class="row6 table">XX</div></td>
+          <td><div id="xy66" class="row6 table">XX</div></td>
+          <td><div id="xy76" class="row6 table">XX</div></td>
+          <td><div id="xy86" class="row6 table">XX</div></td>
+          <td><div id="xy96" class="row6 table">XX</div></td>
+          <td><button id="btnE6" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line8">
-            <td>
-                <button id="btnW7" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy07" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy17" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy27" class="row7 table">XX</div>
-              <td>
-                <div id="xy37" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy47" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy57" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy67" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy77" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy87" class="row7 table">XX</div>
-              </td>
-              <td>
-                <div id="xy97" class="row7 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE7" class="btnE"></button>
-              </td>
+          <td><button id="btnW7" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy07" class="row7 table">XX</div></td>
+          <td><div id="xy17" class="row7 table">XX</div></td>
+          <td><div id="xy27" class="row7 table">XX</div></td>
+          <td><div id="xy37" class="row7 table">XX</div></td>
+          <td><div id="xy47" class="row7 table">XX</div></td>
+          <td><div id="xy57" class="row7 table">XX</div></td>
+          <td><div id="xy67" class="row7 table">XX</div></td>
+          <td><div id="xy77" class="row7 table">XX</div></td>
+          <td><div id="xy87" class="row7 table">XX</div></td>
+          <td><div id="xy97" class="row7 table">XX</div></td>
+          <td><button id="btnE7" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line9">
-            <td>
-                <button id="btnW8" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy08" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy18" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy28" class="row8 table">XX</div>
-              <td>
-                <div id="xy38" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy48" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy58" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy68" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy78" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy88" class="row8 table">XX</div>
-              </td>
-              <td>
-                <div id="xy98" class="row8 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE8" class="btnE"></button>
-              </td>
+          <td><button id="btnW8" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy08" class="row8 table">XX</div></td>
+          <td><div id="xy18" class="row8 table">XX</div></td>
+          <td><div id="xy28" class="row8 table">XX</div></td>
+          <td><div id="xy38" class="row8 table">XX</div></td>
+          <td><div id="xy48" class="row8 table">XX</div></td>
+          <td><div id="xy58" class="row8 table">XX</div></td>
+          <td><div id="xy68" class="row8 table">XX</div></td>
+          <td><div id="xy78" class="row8 table">XX</div></td>
+          <td><div id="xy88" class="row8 table">XX</div></td>
+          <td><div id="xy98" class="row8 table">XX</div></td>
+          <td><button id="btnE8" class="btnLaunchers btnE"></button></td>
         </tr>
         <tr id="line10">
-            <td>
-                <button id="btnW9" class="btnW"></button>
-              </td>
-              <td>
-                <div id="xy09" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy19" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy29" class="row9 table">XX</div>
-              <td>
-                <div id="xy39" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy49" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy59" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy69" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy79" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy89" class="row9 table">XX</div>
-              </td>
-              <td>
-                <div id="xy99" class="row9 table">XX</div>
-              </td>
-              <td>
-                  <button id="btnE9" class="btnE"></button>
-              </td>
-        </tr><td>
-          </td>
-          <td>
-            <button id="btnS0" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS1" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS2" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS3" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS4" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS5" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS6" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS7" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS8" class="btnS"></button>
-          </td>
-          <td>
-            <button id="btnS9" class="btnS"></button>
-          </td>
-          <td> </td>
+          <td><button id="btnW9" class="btnLaunchers btnW"></button></td>
+          <td><div id="xy09" class="row9 table">XX</div></td>
+          <td><div id="xy19" class="row9 table">XX</div></td>
+          <td><div id="xy29" class="row9 table">XX</div></td>
+          <td><div id="xy39" class="row9 table">XX</div></td>
+          <td><div id="xy49" class="row9 table">XX</div></td>
+          <td><div id="xy59" class="row9 table">XX</div></td>
+          <td><div id="xy69" class="row9 table">XX</div></td>
+          <td><div id="xy79" class="row9 table">XX</div></td>
+          <td><div id="xy89" class="row9 table">XX</div></td>
+          <td><div id="xy99" class="row9 table">XX</div></td>
+          <td><button id="btnE9" class="btnLaunchers btnE"></button></td>
         </tr>
-
+          <td></td>
+          <td><button id="btnS0" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS1" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS2" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS3" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS4" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS5" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS6" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS7" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS8" class="btnLaunchers btnS"></button></td>
+          <td><button id="btnS9" class="btnLaunchers btnS"></button></td>
+          <td></td>
         </tr>
       </table>
     </div>
@@ -467,16 +187,11 @@
     <main role="main" class="container">
       <div class="starter-template">
         <div id=array></div>
-		</div>
+		  </div>
     </main><!-- /.container -->
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-	<script src="index.js"></script>
+  	<script src="index.js"></script>
   </body>
 </html>
