@@ -343,6 +343,7 @@ function showExit(missle,uTurn,cntTry,hitTheTarget){
 function checkHit(board,missile){
     var direction=checkMissle(board,missile)
     if(direction=="hit"){
+        missileHitSound.play()
         return true
     }
     else{
@@ -645,7 +646,6 @@ function missleVision(board, missle) {
     printMissleVision(array)
     return array
 }
-
 function printMissleVision(array) {
     var ans = ""
     for (var x = 0; x < 3; x++) {
@@ -678,7 +678,7 @@ function beReadyForNextReplay(x){
  if(num>=moves[x].length){
     num=0 
     if(x>=moves.length-1){
-         console.log("big")
+         endMusic.pause()
      }
      else{
         x++
@@ -1060,10 +1060,12 @@ $(".table").click(function signAsMine(){
     $("#"+this.id).html("!!!!")
 })
 $("#replay").click( function showReplay(){
+    endMusic.play()
     num=0
     replay1try(0)
 })
 $("#finish").click(function endGame(){
+    endMusic.play
     var ans=true
     for(var x=0;x<mineList.length;x++){
         if(!checkMine(gameBoard,mineList[x][0],mineList[x][1])){
@@ -1080,6 +1082,7 @@ $("#finish").click(function endGame(){
 })
 $("#refresh").click(function refresh(){
     location.reload(true)
+
 })
 var cntMine=0
 var num=0
@@ -1087,12 +1090,19 @@ var mineList
  var gameBoard
  var moves
  var cntTry
+ var history
+ var missileHitSound = document.createElement("audio");
+ missileHitSound.src = "sounds/80938__tony-b-kksm__soft-explosion.wav";
+ var endMusic = document.createElement("audio");
+ endMusic.src = "sounds/ponponpon.mp3";
+
  window.onload = function() {
     moves=[]
+    history=[]
     var numMine=5
      gameBoard=makeCleanBoard()
      insertMines(gameBoard,numMine)
      printBoard(gameBoard)
      cntTry=0
      mineList=new Array(numMine)
-   }
+}
