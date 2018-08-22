@@ -667,10 +667,24 @@ function cleanBoardAndMakeAStep(id){
     $(".table").css("background-color","aqua")
     $("#"+id).css("background-color","red")
 }
-function replay1try(callBack){
+function replay1try(x){
     cleanBoardAndMakeAStep(moves[x][num])
-    if(++num==moves[x].length){return console.log("yay")}
-    window.setTimeout(replay1try,500)
+    if(++num==moves[x].length){beReadyForNextReplay(x)}
+    else{
+        window.setTimeout(function(){replay1try(x)},300)
+    }
+}
+function beReadyForNextReplay(x){
+ if(num>=moves[x].length){
+    num=0 
+    if(x>=moves.length-1){
+         console.log("big")
+     }
+     else{
+        x++
+        setTimeout(function(){replay1try(x)},300)
+     }
+ }
 }
 function test1MineDirectionNorthMineAtNorthWest() {
     var myBoard = makeCleanBoard()
@@ -1047,8 +1061,7 @@ $(".table").click(function signAsMine(){
 })
 $("#replay").click( function showReplay(){
     num=0
-    x=0
-    replay1try()
+    replay1try(0)
 })
 $("#finish").click(function endGame(){
     var ans=true
@@ -1076,7 +1089,7 @@ var mineList
  var cntTry
  window.onload = function() {
     moves=[]
-    var numMine=1
+    var numMine=5
      gameBoard=makeCleanBoard()
      insertMines(gameBoard,numMine)
      printBoard(gameBoard)
