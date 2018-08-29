@@ -446,7 +446,39 @@ function printLocationOfMissle(missle) {
     }
     console.log("the loction is: X:" + x + " and Y:" + y)
 }
-
+function findAndRmoveMine(mine){
+    var index=-1
+    if(mineList.length===0){
+        return false
+    }
+    for(var a=0;a<mineList.length;a++){
+        if(mineList[a][0]===mine[0]&&mineList[a][1]===mine[1]){
+            index=a
+            break;
+        }
+    }
+    if(index===-1){
+        return false
+    }
+    else{
+        if(index===0){
+            mineList=[]
+            return true
+        }
+        if(index+1===mineList.length){
+            mineList.pop()
+            return true
+        }
+        for(var x=index;x<mineList.length;x++){
+            var y=x-1
+            mineList[y][0]=mineList[x][0]
+            mineList[y][1]=mineList[x][1]
+        }
+        cntMine--
+        mineList.pop()
+        return true
+    }
+}
 function missleVision(board, missle) {
     var array = new Array(3)
     switch (missle.direction) {
@@ -525,10 +557,15 @@ function missleVision(board, missle) {
 function endGame(){
     endMusic.play()
     var ans=true
-    for(var x=0;x<mineList.length;x++){
-        if(!checkMine(gameBoard,mineList[x][0],mineList[x][1])){
-            ans=false;
-            break;
+    if(numMine!==cntMine){
+        ans=false
+    }
+    else{
+        for(var x=0;x<mineList.length;x++){
+            if(!checkMine(gameBoard,mineList[x][0],mineList[x][1])){
+                ans=false;
+                break;
+            }
         }
     }
     if(ans){
@@ -965,9 +1002,15 @@ $(".table").click(function signAsMine(){
     miney=parseInt(mines.charAt(3))
     mine[0]=minex
     mine[1]=miney
-    mineList[cntMine]=mine
-    cntMine++
-    $("#"+this.id).html("!!!!")
+    if(findAndRmoveMine(mine)){
+        $("#"+this.id).html("XX")
+    }
+    else{
+        mineList.push(mine)
+        cntMine++
+        $("#"+this.id).html("!!!!")
+    }
+    $("#numGuesses").html("you are guess the location of "+cntMine+" mines")
     if(cntMine===numMine){
         endGame()
     }
@@ -1003,10 +1046,11 @@ var colors
     moves=[]
     history=[]
     numMine=100
+    $("#mineNumber").html("there are "+numMine+" mines hidden in the board")
      gameBoard=makeCleanBoard()
      insertMines(gameBoard,numMine)
      printBoard(gameBoard)
      cntTry=0
-     mineList=new Array(numMine)
+     mineList=[]
      colors=['AliceBlue','Bisque','Black','Blue','BlueViolet','Brown','CadetBlue','Chartreuse','DarkGreen','DeepPink']
 }
