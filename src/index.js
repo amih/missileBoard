@@ -361,167 +361,204 @@ function checkUTurn(board,missle){
             
     }
 }
-function sendMissle(board, missle,cntTry) {
-    var cnt=0
-    var firsttime=true
-    var fromDirection
-    var hitTheTarget=false
-    var haveDoneUTurn=false
-    while(!onBorderAndGoingOut(missle)||cnt==0){
-        if(cnt!=0){
-            firsttime=false
-        }
-        switch(missle.direction){
-        case "North":
-        if(!onBorderAndGoingOut(missle)){
-            var fromDirection=missle.direction
-            missle.direction=checkMissle(board,missle)
-               if(outBorderCantEnter(missle)){
-                if(!onBorderHit(missle))
-                {
-                    missle.direction="U"
-                    missle=doUTurn(missle,fromDirection)
-                    haveDoneUTurn=true;
-                }
-                else{
-                    hitTheTarget=true
-                    missle.direction=fromDirection
-                }
-            }
-        else{
-            if(checkHit(board,missle)){
-                missle.direction=fromDirection
-                hitTheTarget=true
-            }
-            else{
-                if(outBoardAndDontEnter(missle,firsttime)){
-                    missle.direction="South"
-                    haveDoneUTurn=true;
-                }
+// function sendMissle(board, missle,cntTry) {
+//     var cnt=0
+//     firsttime=true
+//     var fromDirection
+//     var hitTheTarget=false
+//     var haveDoneUTurn=false
+//     while(!onBorderAndGoingOut(missle)||cnt==0){
+//         if(cnt!=0){
+//             firsttime=false
+//         }
+//         switch(missle.direction){
+//         case "North":
+//         if(!onBorderAndGoingOut(missle)){
+//             var fromDirection=missle.direction
+//             missle.direction=checkMissle(board,missle)
+//                if(outBorderCantEnter(missle)){
+//                 if(!onBorderHit(missle))
+//                 {
+//                     missle.direction="U"
+//                     missle=doUTurn(missle,fromDirection)
+//                     haveDoneUTurn=true;
+//                 }
+//                 else{
+//                     hitTheTarget=true
+//                     missle.direction=fromDirection
+//                 }
+//             }
+//         else{
+//             if(checkHit(board,missle)){
+//                 missle.direction=fromDirection
+//                 hitTheTarget=true
+//             }
+//             else{
+//                 if(outBoardAndDontEnter(missle,firsttime)){
+//                     missle.direction="South"
+//                     haveDoneUTurn=true;
+//                 }
 
-                else{
-                    var destenation=missleStep(missle)
-                    missle.x=destenation[0]
-                    missle.y=destenation[1]
-                }
-            }
-        }
+//                 else{
+//                     var destenation=missleStep(missle)
+//                     missle.x=destenation[0]
+//                     missle.y=destenation[1]
+//                 }
+//             }
+//         }
+//     }
+//         break;
+//         case "South":
+//             if(!onBorderAndGoingOut(missle)){
+//                 var fromDirection=missle.direction
+//                 missle.direction=checkMissle(board,missle)
+//                    if(outBorderCantEnter(missle)){
+//                     if(!onBorderHit(missle))
+//                     {
+//                         missle.direction="U"
+//                         missle=doUTurn(missle,fromDirection)
+//                         haveDoneUTurn=true;
+//                     }
+//                     else{
+//                         hitTheTarget=true
+//                         missle.direction=fromDirection
+//                     }
+//                 }
+//             else{
+//                 if(checkHit(board,missle)){
+//                     missle.direction=fromDirection
+//                     hitTheTarget=true
+//                 }
+//                 else{
+//                     if(outBoardAndDontEnter(missle,firsttime)){
+//                         missle.direction="North"
+//                         haveDoneUTurn=true;
+//                     }
+//                     else{
+//                         var destenation=missleStep(missle)
+//                         missle.x=destenation[0]
+//                         missle.y=destenation[1]
+//                     }
+//                 }
+//             }
+//         }
+//             break;
+//         case "East":
+//                 if(!onBorderAndGoingOut(missle)){
+//                 var fromDirection=missle.direction
+//                 missle.direction=checkMissle(board,missle)
+//                    if(outBorderCantEnter(missle)){
+//                     if(!onBorderHit(missle))
+//                     {
+//                         missle.direction="U"
+//                         missle=doUTurn(missle,fromDirection)
+//                         haveDoneUTurn=true;
+//                     }
+//                     else{
+//                         hitTheTarget=true
+//                         missle.direction=fromDirection
+//                     }
+//                 }
+//             else{
+//                 if(checkHit(board,missle)){
+//                     missle.direction=fromDirection
+//                     hitTheTarget=true
+//                 }
+//                 else{
+//                     if(outBoardAndDontEnter(missle,firsttime)){
+//                         missle.direction="West"
+//                         haveDoneUTurn=true;
+//                     }
+//                     else{
+//                         var destenation=missleStep(missle)
+//                         missle.x=destenation[0]
+//                         missle.y=destenation[1]
+//                     }
+//                 }
+//             }
+//         }
+//             break;
+//         case "West":
+//         if(!onBorderAndGoingOut(missle)){
+//             var fromDirection=missle.direction
+//             missle.direction=checkMissle(board,missle)
+//                if(outBorderCantEnter(missle)){
+//                 if(!onBorderHit(missle))
+//                 {
+//                     missle.direction="U"
+//                     missle=doUTurn(missle,fromDirection)
+//                     haveDoneUTurn=true;
+//                 }
+//                 else{
+//                     hitTheTarget=true
+//                     missle.direction=fromDirection
+//                 }
+//             }
+//         else{
+//             if(checkHit(board,missle)){
+//                 missle.direction=fromDirection
+//                 hitTheTarget=true
+//             }
+//             else{
+//                 if(outBoardAndDontEnter(missle,firsttime)){
+//                     missle.direction="East"
+//                     haveDoneUTurn=true;
+//                 }
+//                 else{
+//                     var destenation=missleStep(missle)
+//                     missle.x=destenation[0]
+//                     missle.y=destenation[1]
+//                 }
+//             }
+//         }
+//     }
+//         break;  
+//             break;
+//         }
+//         var location="xy"+missle.x+missle.y
+//         moves[cntTry].push(location)
+//         if(onBorderAndGoingOut(missle)||outBoardAndDontEnter(missle,firsttime)||hitTheTarget==true){
+//             break;
+//         }
+//     }
+//     showExit(missle,haveDoneUTurn,cntTry,hitTheTarget)
+// }
+function checkAvailableStep(board,missile,firsttime){
+    if(outBoardAndDontEnter(missile,firsttime)){return true}
+    if(onBorderAndGoingOut(missile)){return true}
+    return false
+}
+function checkDirection(board,missile){
+    var lastDirection=missile.direction
+    missile.direction=checkMissle(board,missile)
+    if(missile.direction==="hit"){return "hit"}
+    if(lastDirection!==missile.direction){return "U"}
+    else{return "normal"}
+}
+function sendMissile(board,missile,cntTry){
+    if(checkAvailableStep(board,missile,firsttime)){
+        showExit(missile,false,cntTry,false)
+        return true
     }
-        break;
-        case "South":
-            if(!onBorderAndGoingOut(missle)){
-                var fromDirection=missle.direction
-                missle.direction=checkMissle(board,missle)
-                   if(outBorderCantEnter(missle)){
-                    if(!onBorderHit(missle))
-                    {
-                        missle.direction="U"
-                        missle=doUTurn(missle,fromDirection)
-                        haveDoneUTurn=true;
-                    }
-                    else{
-                        hitTheTarget=true
-                        missle.direction=fromDirection
-                    }
-                }
-            else{
-                if(checkHit(board,missle)){
-                    missle.direction=fromDirection
-                    hitTheTarget=true
-                }
-                else{
-                    if(outBoardAndDontEnter(missle,firsttime)){
-                        missle.direction="North"
-                        haveDoneUTurn=true;
-                    }
-                    else{
-                        var destenation=missleStep(missle)
-                        missle.x=destenation[0]
-                        missle.y=destenation[1]
-                    }
-                }
-            }
-        }
-            break;
-        case "East":
-                if(!onBorderAndGoingOut(missle)){
-                var fromDirection=missle.direction
-                missle.direction=checkMissle(board,missle)
-                   if(outBorderCantEnter(missle)){
-                    if(!onBorderHit(missle))
-                    {
-                        missle.direction="U"
-                        missle=doUTurn(missle,fromDirection)
-                        haveDoneUTurn=true;
-                    }
-                    else{
-                        hitTheTarget=true
-                        missle.direction=fromDirection
-                    }
-                }
-            else{
-                if(checkHit(board,missle)){
-                    missle.direction=fromDirection
-                    hitTheTarget=true
-                }
-                else{
-                    if(outBoardAndDontEnter(missle,firsttime)){
-                        missle.direction="West"
-                        haveDoneUTurn=true;
-                    }
-                    else{
-                        var destenation=missleStep(missle)
-                        missle.x=destenation[0]
-                        missle.y=destenation[1]
-                    }
-                }
-            }
-        }
-            break;
-        case "West":
-        if(!onBorderAndGoingOut(missle)){
-            var fromDirection=missle.direction
-            missle.direction=checkMissle(board,missle)
-               if(outBorderCantEnter(missle)){
-                if(!onBorderHit(missle))
-                {
-                    missle.direction="U"
-                    missle=doUTurn(missle,fromDirection)
-                    haveDoneUTurn=true;
-                }
-                else{
-                    hitTheTarget=true
-                    missle.direction=fromDirection
-                }
-            }
-        else{
-            if(checkHit(board,missle)){
-                missle.direction=fromDirection
-                hitTheTarget=true
-            }
-            else{
-                if(outBoardAndDontEnter(missle,firsttime)){
-                    missle.direction="East"
-                    haveDoneUTurn=true;
-                }
-                else{
-                    var destenation=missleStep(missle)
-                    missle.x=destenation[0]
-                    missle.y=destenation[1]
-                }
-            }
-        }
+    var direction=checkDirection(board,missile)
+    if(direction=="hit"){
+        showExit(missile,false,cntTry,true)
+        missileHitSound.play()
+        return true
     }
-        break;  
-            break;
-        }
-        var location="xy"+missle.x+missle.y
-        moves[cntTry].push(location)
-        if(onBorderAndGoingOut(missle)||outBoardAndDontEnter(missle,firsttime)||hitTheTarget==true){
-            break;
-        }
+    if(firsttime&&direction==="U"){
+            firsttime=false
+            showExit(missile,true,cntTry,false)
+            return true
     }
-    showExit(missle,haveDoneUTurn,cntTry,hitTheTarget)
+    var step=missleStep(missile)
+    missile.x=step[0]
+    missile.y=step[1]
+    var location="xy"+step[0]+step[1]
+    moves[cntTry].push(location)
+    firsttime=false
+    missileStepSound.play()
+    missileStepSound.onended=function(){sendMissile(board,missile,cntTry)}
 }
 function outBoardAndDontEnter(missle,firsttime){
     if(missle.y==-1&&missle.direction!="South"&&firsttime){return true}
@@ -990,14 +1027,15 @@ $(".btnN").click(function sendMissleSouth(){
     btnx=btnx.split('N')
     btnx=btnx[1]
     btnx=parseInt(btnx)
-    var missle={
+    var missile={
         fromX:btnx,
         fromY:-1,
         x:btnx,
         y:-1,
         direction:"South"
     }
-    sendMissle(gameBoard,missle,cntTry)
+    firsttime=true
+    sendMissile(gameBoard,missile,cntTry)
     cntTry++
 })
 $(".btnW").click(function sendMissleSouth(){
@@ -1006,14 +1044,15 @@ $(".btnW").click(function sendMissleSouth(){
     btny=btny.split('W')
     btny=btny[1]
     btny=parseInt(btny)
-    var missle={
+    var missile={
         fromX:-1,
         fromY:btny,
         x:-1,
         y:btny,
         direction:"East"
     }
-     sendMissle(gameBoard,missle,cntTry)
+    firsttime=true
+     sendMissile(gameBoard,missile,cntTry)
      cntTry++
 })
 $(".btnE").click(function sendMissleSouth(){
@@ -1022,14 +1061,15 @@ $(".btnE").click(function sendMissleSouth(){
     btny=btny.split('E')
     btny=btny[1]
     btny=parseInt(btny)
-    var missle={
+    var missile={
         fromX:10,
         fromY:btny,
         x:10,
         y:btny,
         direction:"West"
     }
-     sendMissle(gameBoard,missle,cntTry)
+    firsttime=true
+     sendMissile(gameBoard,missile,cntTry)
      cntTry++
 })
 $(".btnS").click(function sendMissleSouth(){
@@ -1038,14 +1078,15 @@ $(".btnS").click(function sendMissleSouth(){
     btnx=btnx.split('S')
     btnx=btnx[1]
     btnx=parseInt(btnx)
-    var missle={
+    var missile={
         fromX:btnx,
         fromY:10,
         x:btnx,
         y:10,
         direction:"North"
     }
-     sendMissle(gameBoard,missle,cntTry)
+    firsttime=true
+     sendMissile(gameBoard,missile,cntTry)
      cntTry++
 })
 $(".table").click(function signAsMine(){
@@ -1085,6 +1126,7 @@ $("#refresh").click(function refresh(){
 
 })
 var cntMine=0
+var firsttime
 var num=0
 var mineList
  var gameBoard
@@ -1095,7 +1137,8 @@ var mineList
  missileHitSound.src = "sounds/80938__tony-b-kksm__soft-explosion.wav";
  var endMusic = document.createElement("audio");
  endMusic.src = "sounds/ponponpon.mp3";
-
+ var missileStepSound = document.createElement("audio");
+ missileStepSound.src = "sounds/157439__nengisuls__misslie-1.mp3";
  window.onload = function() {
     moves=[]
     history=[]
