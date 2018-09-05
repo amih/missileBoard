@@ -463,10 +463,12 @@ function findAndRmoveMine(mine){
     else{
         if(index===0){
             mineList=[]
+            cntMine--
             return true
         }
         if(index+1===mineList.length){
             mineList.pop()
+            cntMine--
             return true
         }
         for(var x=index;x<mineList.length;x++){
@@ -554,27 +556,38 @@ function missleVision(board, missle) {
     printMissleVision(array)
     return array
 }
+function correctGuesses(){
+    var cnt=0
+    for(var x=0;x<mineList.length;x++){
+        if(checkMine(gameBoard,mineList[x][0],mineList[x][1])){
+            cnt++
+        }
+    }
+    return cnt
+}
 function endGame(){
     endMusic.play()
+    var correct=correctGuesses()
+    var score=(2*correct/(cntTry+1))
     var ans=true
     if(numMine!==cntMine){
         ans=false
     }
+    if(correct===numMine){
+        ans=true
+    }
     else{
-        for(var x=0;x<mineList.length;x++){
-            if(!checkMine(gameBoard,mineList[x][0],mineList[x][1])){
-                ans=false;
-                break;
-            }
-        }
+        ans=false
     }
     if(ans){
         endMusic.pause()
-        alert("You Are The Best Winner")
+        $("#result").html("you are the best winner and your score is "+score)
+        endGamePopup()
     }
     else{
         endMusic.pause()
-        alert("Better Luck Next Time")
+        $("#result").html("better luck next time but look at the bright side your score is "+score)
+        endGamePopup()
     }
 }
 function printMissleVision(array) {
@@ -593,6 +606,18 @@ function printMissleVision(array) {
 function addToHistory(button,cntTry,history){
     history[cntTry]=button
     return true
+}
+function startGame(minesNum) {
+    moves=[]
+    history=[]
+    numMine=minesNum
+    $("#mineNumber").html("there are "+numMine+" mines hidden in the board")
+     gameBoard=makeCleanBoard()
+     insertMines(gameBoard,numMine)
+     printBoard(gameBoard)
+     cntTry=0
+     mineList=[]
+     colors=['AliceBlue','Bisque','Black','Blue','BlueViolet','Brown','CadetBlue','Chartreuse','DarkGreen','DeepPink']
 }
 function cleanBoardAndMakeAStep(id){
     $(".table").css("background-color","aqua")
@@ -1010,7 +1035,7 @@ $(".table").click(function signAsMine(){
         cntMine++
         $("#"+this.id).html("!!!!")
     }
-    $("#numGuesses").html("you are guess the location of "+cntMine+" mines")
+    $("#numGuesses").html("you are have guessed the location of "+cntMine+" mines")
     if(cntMine===numMine){
         endGame()
     }
@@ -1020,9 +1045,18 @@ $("#replay").click( function showReplay(){
     num=0
     replay1try(0)
 })
+function endGamePopup(){
+    $("#endGameMessage").css('display','block')
+}
 $("#refresh").click(function refresh(){
     location.reload(true)
-
+})
+$("#yes").click(function(){
+    startGame(numMine+5)
+    $("#endGameMessage").css('display','none')
+})
+$("#no").click(function(){
+    $("#endGameMessage").css('display','none')
 })
 var cntMine=0
 var numMine
@@ -1042,15 +1076,4 @@ var colors
  endMusic.src = "sounds/ponponpon.mp3";
  var missileStepSound = document.createElement("audio");
  missileStepSound.src = "sounds/157439__nengisuls__misslie-1.mp3";
- window.onload = function() {
-    moves=[]
-    history=[]
-    numMine=100
-    $("#mineNumber").html("there are "+numMine+" mines hidden in the board")
-     gameBoard=makeCleanBoard()
-     insertMines(gameBoard,numMine)
-     printBoard(gameBoard)
-     cntTry=0
-     mineList=[]
-     colors=['AliceBlue','Bisque','Black','Blue','BlueViolet','Brown','CadetBlue','Chartreuse','DarkGreen','DeepPink']
-}
+ window.onload = startGame(1)

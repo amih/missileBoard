@@ -11,18 +11,27 @@ body {
   height: 20px;
   width: 20px
 }
-/* .btnN{
-}
-.btnE{
-}
-.btnW{
-}
-.btnS{
-} */
 table, th, td{
   border: solid 3px plum;
   border-collapse: collapse;
 }
 .replay{
   background-color: pink;
+}
+.model{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0,0.5);
+}
+.modelContent{
+  background-color: blueviolet;
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
 }
